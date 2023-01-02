@@ -1,14 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
-# Create your views here.
+from todolist_app.models import TaskList
+from todolist_app.forms import TaskForm
+from django.contrib import messages
 
 
 def todolist(request):
-    context = {
-        'welcome_text': "Welcome to Todo List App.",
-    }
-    return render(request, 'todolist.html', context)
+    if request.method == "POST":
+        form = TaskForm(request.POST or none)
+        if form.is_valid():
+            form.save()
+        messages.success(request, ("New Task Added Successfully!"))
+        return redirect('todolist')
+    else:
+        all_tasks = TaskList.objects.all
+        return render(request, 'todolist.html', {'all_tasks': all_tasks})
 
 
 def contact(request):

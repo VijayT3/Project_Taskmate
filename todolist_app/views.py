@@ -58,10 +58,8 @@ def edit_task(request, task_id):
 
 
 def index(request):
-    context = {
-        'index_text': "Welcome to Index Page.",
-    }
-    return render(request, 'index.html', context)
+
+    return render(request, 'index.html')
 
 
 def contact(request):

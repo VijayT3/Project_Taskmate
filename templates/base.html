@@ -34,6 +34,23 @@
             </ul>
           </div>
         </div>
+        
+        {% if user.is_authenticated %}
+        <div class="d-flex" role="search">
+          <p class="p-2 text-light bg-dark">Logged in as {{ user.username }}</p>
+          <a href="{% url 'logout' %}">
+          <button class="btn btn-info" type="submit">Logout</button></a>
+        </div>
+  
+        {% else %}
+        <a href="{% url 'login' %}">
+          <button class="btn btn-success m-2" type="submit">Login</button></a>
+
+          <a href="{% url 'register' %}">
+            <button class="btn btn-primary m-2" type="submit">Register</button></a>
+        
+        {% endif %}
+
       </nav>
   </head>
   <body class="bg-light">

@@ -8,6 +8,9 @@
   <div class="container">
     <br>
     <div class="container">
+        {% if task_obj.manage == request.user %}
+    <!-- only user can edit task, 
+      so check user of task and requested user -->
         <form method="POST">
           {% csrf_token %} 
           
@@ -20,6 +23,9 @@
             <button type="submit" class="btn btn-primary">Update Task</button>
             
         </form>
+        {% else %}
+          <p>Access Restricted. You are not allowed!</p>
+        {% endif %}
     </div>
   </div>
 {% endblock content %}
